@@ -6,7 +6,7 @@ This is a simple CLI project made in python as an assignment for the course of [
 
 Program Requirements
 
-```
+
 1. Prompt user by asking “What would you like? (espresso/latte/cappuccino):”
 a. Check the user’s input to decide what to do next.
 b. The prompt should show every time action has completed, e.g. once the drink is dispensed. The prompt should show again to serve the next customer.
@@ -42,4 +42,3 @@ Milk: 50ml
 Coffee: 76g
 Money: $2.5
 c. If the user has inserted too much money, the machine should offer change.
-```
