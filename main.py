@@ -35,11 +35,11 @@ profit = 0
 def main():
     choice = input("What would you like? (espresso/latte/cappuccino): ")
     if choice == 'espresso':
-        process_order(MENU['espresso'])
+        process_order(MENU['espresso'], 'espresso')
     elif choice == 'latte':
-        process_order(MENU['latte'])
+        process_order(MENU['latte'], 'latte')
     elif choice == 'cappuccino':
-        process_order(MENU["cappuccino"])
+        process_order(MENU["cappuccino"], 'cappuccino')
     elif choice == 'report':
         report()
     elif choice == 'off':
@@ -56,7 +56,7 @@ def report():
     Water: {resources['water']}ml
     Milk: {resources['milk']}ml
     Coffee: {resources['coffee']}ml
-    Money: ${profit}
+    Money: ${profit:.2f}
     """)
 
 def resource_check(order_ingredients):
@@ -76,10 +76,26 @@ def ask_coins():
 
     return round(total, 2)
 
-def process_order(order):
+def process_order(order, drink_name):
     if not resource_check(order['ingredients']):
         main()
-    
+    inserted_money = ask_coins()
+    if inserted_money < order['cost']:
+        print("Not enough money inserted. Refunding money...")
+        main()
+    remainder = inserted_money - order['cost']
+    global profit 
+    profit += order['cost']
+
+    for ingredient_name in order['ingredients']:
+        resources[ingredient_name] = resources[ingredient_name] - order['ingredients'][ingredient_name]
+
+    if remainder > 0:
+        # print(f"Your change is {round(remainder, 2)}")
+        format_change = "{:.2f}".format(remainder)
+        print(f"Your change is {format_change}")
+    print(f"Here is your {drink_name}")
+
 
 
 main()
