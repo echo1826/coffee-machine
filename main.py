@@ -35,11 +35,11 @@ profit = 0
 def main():
     choice = input("What would you like? (espresso/latte/cappuccino): ")
     if choice == 'espresso':
-        process_espresso()
+        process_espresso(MENU['espresso'])
     elif choice == 'latte':
-        process_latte()
+        process_latte(MENU['latte'])
     elif choice == 'cappuccino':
-        process_cappuccino()
+        process_cappuccino(MENU["cappuccino"])
     elif choice == 'report':
         report()
     elif choice == 'off':
@@ -58,6 +58,18 @@ def report():
     Coffee: {resources['coffee']}ml
     Money: ${profit}
     """)
+
+def resource_check(order_ingredients):
+    for ingredient_name in order_ingredients:
+        if order_ingredients[ingredient_name] > resources[ingredient_name]:
+            print(f"Sorry there is not enough {ingredient_name}.")
+            return False
+    return True
+
+def process_espresso(order):
+    if not resource_check(order['ingredients']):
+        main()
+    
 
 
 main()
