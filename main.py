@@ -1,10 +1,3 @@
-# 1. Makes 3 hot flavors
-# espresso, latte, cappuccino
-
-# 2. Coin Operated
-
-
-
 MENU = {
     "espresso": {
         "ingredients": {
@@ -36,3 +29,35 @@ resources = {
     "milk": 200,
     "coffee": 100,
 }
+
+profit = 0
+
+def main():
+    choice = input("What would you like? (espresso/latte/cappuccino): ")
+    if choice == 'espresso':
+        process_espresso()
+    elif choice == 'latte':
+        process_latte()
+    elif choice == 'cappuccino':
+        process_cappuccino()
+    elif choice == 'report':
+        report()
+    elif choice == 'off':
+        exit(1)
+    else:
+        print("Incorrect choice inputted.\nPlease try again.")
+        main()
+    main()
+
+
+def report():
+    print("Printing report...")
+    print(f"""
+    Water: {resources['water']}ml
+    Milk: {resources['milk']}ml
+    Coffee: {resources['coffee']}ml
+    Money: ${profit}
+    """)
+
+
+main()
