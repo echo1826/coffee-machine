@@ -67,14 +67,20 @@ def resource_check(order_ingredients):
     return True
 
 def ask_coins():
-    print("Please insert coins.")
-    quarters = int(input("How many quarters?: "))
-    dimes = int(input("How many dimes?: "))
-    nickels = int(input("How many nickels?: "))
-    pennies = int(input("How many pennies?: "))
-    total = (quarters * .25) + (dimes * .10) + (nickels * .05) + (pennies * .01)
-
-    return round(total, 2)
+    
+    prompting = True
+    while prompting:
+        print("Please insert coins.")
+        try:
+            quarters = int(input("How many quarters?: "))
+            dimes = int(input("How many dimes?: "))
+            nickels = int(input("How many nickels?: "))
+            pennies = int(input("How many pennies?: "))
+            total = (quarters * .25) + (dimes * .10) + (nickels * .05) + (pennies * .01)
+            return round(total, 2)
+        except ValueError:
+            print("Input only numbers!")
+            continue
 
 def process_order(order, drink_name):
     if not resource_check(order['ingredients']):
