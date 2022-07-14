@@ -35,11 +35,11 @@ profit = 0
 def main():
     choice = input("What would you like? (espresso/latte/cappuccino): ")
     if choice == 'espresso':
-        process_espresso(MENU['espresso'])
+        process_order(MENU['espresso'])
     elif choice == 'latte':
-        process_latte(MENU['latte'])
+        process_order(MENU['latte'])
     elif choice == 'cappuccino':
-        process_cappuccino(MENU["cappuccino"])
+        process_order(MENU["cappuccino"])
     elif choice == 'report':
         report()
     elif choice == 'off':
@@ -66,7 +66,17 @@ def resource_check(order_ingredients):
             return False
     return True
 
-def process_espresso(order):
+def ask_coins():
+    print("Please insert coins.")
+    quarters = int(input("How many quarters?: "))
+    dimes = int(input("How many dimes?: "))
+    nickels = int(input("How many nickels?: "))
+    pennies = int(input("How many pennies?: "))
+    total = (quarters * .25) + (dimes * .10) + (nickels * .05) + (pennies * .01)
+
+    return round(total, 2)
+
+def process_order(order):
     if not resource_check(order['ingredients']):
         main()
     
